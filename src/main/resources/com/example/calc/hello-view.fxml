@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="356.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.calc.CalculatorController">
+<AnchorPane onKeyPressed="#keys" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="356.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.calc.CalculatorController" >
     <children>
         <GridPane layoutY="100.0" prefHeight="256.0" prefWidth="200.0">
             <columnConstraints>
@@ -24,8 +24,8 @@
                 <Button mnemonicParsing="false" onAction="#On7ButtonClick" prefHeight="79.0" prefWidth="130.0" text="7" GridPane.rowIndex="2" />
                 <Button mnemonicParsing="false" prefHeight="99.0" prefWidth="132.0" text="1/x" GridPane.rowIndex="1" />
                 <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="153.0" text="\%" />
-                <Button mnemonicParsing="false" onAction="#OnCEButtonClick" prefHeight="169.0" prefWidth="275.0" text="CE" GridPane.columnIndex="1" />
-                <Button mnemonicParsing="false" onAction="#OnCButtonClick" prefHeight="189.0" prefWidth="193.0" text="C" GridPane.columnIndex="2" />
+                <Button mnemonicParsing="false" onAction="#OnClearEntryButtonClick" prefHeight="169.0" prefWidth="275.0" text="CE" GridPane.columnIndex="1" />
+                <Button mnemonicParsing="false" onAction="#OnClearButtonClick" prefHeight="189.0" prefWidth="193.0" text="C" GridPane.columnIndex="2" />
                 <Button fx:id="Del" mnemonicParsing="false" onAction="#OnDelButtonClick" prefHeight="153.0" prefWidth="155.0" text="Del" GridPane.columnIndex="3" />
                 <Button mnemonicParsing="false" onAction="#OnSqrButtonClick" prefHeight="70.0" prefWidth="115.0" text="²" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <Button mnemonicParsing="false" onAction="#OnSqrtButtonClick" prefHeight="100.0" prefWidth="140.0" text="root" GridPane.columnIndex="2" GridPane.rowIndex="1" />

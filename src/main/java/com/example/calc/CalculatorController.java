@@ -5,6 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
+import javafx.application.Platform;
+import javafx.scene.Node;
 
 public class CalculatorController {
 
@@ -109,27 +111,37 @@ public class CalculatorController {
 
 
     public void OnPlusButtonClick() {
-
+        pruefeUndErsetzeOperator();
+        wasClickedAgain();
         FeldText.appendText("+");
-
     }
 
     public void OnMinusButtonClick() {
-
+        pruefeUndErsetzeOperator();
+        wasClickedAgain();
         FeldText.appendText("-");
-
     }
 
     public void OnMulButtonClick() {
-
+        pruefeUndErsetzeOperator();
+        wasClickedAgain();
         FeldText.appendText("*");
-
     }
 
     public void OnDivButtonClick() {
-
+        pruefeUndErsetzeOperator();
+        wasClickedAgain();
         FeldText.appendText("/");
+    }
 
+    private void pruefeUndErsetzeOperator() {
+        String text = FeldText.getText();
+        if (!text.isEmpty()) {
+            char letztes = text.charAt(text.length() - 1);
+            if (letztes == '+' || letztes == '-' || letztes == '*' || letztes == '/') {
+                FeldText.setText(text.substring(0, text.length() - 1));
+            }
+        }
     }
 
     public void OnSqrButtonClick() {
@@ -152,14 +164,115 @@ public class CalculatorController {
 
 
     @FXML
-    public void keys(KeyEvent enter) {
+    public void initialize() {        //https://www.w3schools.com/java/java_constructors.asp          //https://stackoverflow.com/questions/12005584/initialize-object-directly-in-ja
+        FeldText.setFocusTraversable(false);
+        VerlaufFeld.setFocusTraversable(false);
+        Platform.runLater(() -> {               //https://openjfx.io/javadoc/17/javafx.graphics/javafx/application/Platform.html#runLater(java.lang.Runnable)
+            if (FeldText.getScene() != null) {              //https://openjfx.io/javadoc/17/javafx.graphics/javafx/scene/Node.html#requestFocus()
 
-        if (enter.getCode() == KeyCode.ENTER) {         //https://docs.oracle.com/javase/8/docs/api/java/awt/event/KeyEvent.html
-            enter.consume();
-            OnErgebnisButtonClick();
+                FeldText.getScene().getRoot().requestFocus();           //https://stackoverflow.com/questions/11090846/assigning-to-nested-qvariantmap
 
+                for (Node node : FeldText.getScene().getRoot().lookupAll(".button")) {          //https://openjfx.io/javadoc/17/javafx.graphics/javafx/scene/Parent.html#lookupAll(java.lang.String)
+                    node.setFocusTraversable(false);            //https://openjfx.io/javadoc/17/javafx.graphics/javafx/scene/Node.html#setFocusTraversable(boolean)
+                }
+            }
+        });
+    }
+
+
+    @FXML
+    public void keys(KeyEvent event) {          //https://docs.oracle.com/javase/8/docs/api/java/awt/event/KeyEvent.html
+
+        switch (event.getCode()) {
+
+            case NUMPAD0:
+            case DIGIT0:
+                On0ButtonClick();
+                break;
+
+            case NUMPAD1:
+            case DIGIT1:
+                On1ButtonClick();
+                break;
+
+            case NUMPAD2:
+            case DIGIT2:
+                On2ButtonClick();
+                break;
+
+            case NUMPAD3:
+            case DIGIT3:
+                On3ButtonClick();
+                break;
+
+            case NUMPAD4:
+            case DIGIT4:
+                On4ButtonClick();
+                break;
+
+            case NUMPAD5:
+            case DIGIT5:
+                On5ButtonClick();
+                break;
+
+            case NUMPAD6:
+            case DIGIT6:
+                On6ButtonClick();
+                break;
+
+            case NUMPAD7:
+            case DIGIT7:
+                On7ButtonClick();
+                break;
+
+            case NUMPAD8:
+            case DIGIT8:
+                On8ButtonClick();
+                break;
+
+            case NUMPAD9:
+            case DIGIT9:
+                On9ButtonClick();
+                break;
+
+            case ADD:
+            case PLUS:
+                OnPlusButtonClick();
+                break;
+
+            case SUBTRACT:
+            case MINUS:
+                OnMinusButtonClick();
+                break;
+
+            case MULTIPLY:
+                OnMulButtonClick();
+                break;
+
+            case DIVIDE:
+                OnDivButtonClick();
+                break;
+
+            case DECIMAL:
+            case COMMA:
+            case PERIOD:
+                OnKommaButtonClick();
+                break;
+
+            case ENTER:
+                OnErgebnisButtonClick();
+                break;
+
+            case BACK_SPACE:
+            case DELETE:
+                OnDelButtonClick();
+                break;
+
+            default:
+                return;
         }
 
+        event.consume();
     }
 
 
@@ -168,6 +281,11 @@ public class CalculatorController {
     public String VorzeichenSchnitt() {
 
         String eingabe = FeldText.getText().replace(",", ".");
+
+        if (eingabe.isEmpty()) {
+            warNegativ = false;
+            return "";
+        }
 
         int len = eingabe.length();
 
@@ -264,15 +382,15 @@ public class CalculatorController {
 
     }
 
-    public void OnCButtonClick() {
-        System.out.println("C");
-        FeldText.setText("");
-    }
-
-    public void OnCEButtonClick() {
+    public void OnClearButtonClick() {
         System.out.println("CE");
         FeldText.setText("");
         VerlaufFeld.setText("");
+    }
+
+    public void OnClearEntryButtonClick() {
+        System.out.println("C");
+        FeldText.setText("");
     }
 
     public void OnDelButtonClick() {               // https://stackoverflow.com/questions/7438612/how-to-remove-the-last-character-from-a-string
@@ -284,7 +402,9 @@ public class CalculatorController {
 
         //FeldText.setText(text.replace(text.substring(len-1),""));
 
-        FeldText.deleteText(len - 1, len);
+        if (len > 0) {
+            FeldText.deleteText(len - 1, len);
+        }
 
     }
 
@@ -312,8 +432,51 @@ public class CalculatorController {
 
     public void OnInvertButtonClick() {
 
-        //*(-1)
+        String eingabe = FeldText.getText();
+
+//        boolean count = false;
+//
+//        String buffer = "";
+//
+//        if (count) {
+//            buffer = eingabe;
+//        }
+//
+//        if (eingabe.charAt(0) == '-') {
+//            count = true;
+//            FeldText.setText(buffer);
+//        } else {
+//            eingabe = "-" + eingabe;
+//            FeldText.setText(eingabe);
+//        }
+
+        if (eingabe.isEmpty()) {
+            FeldText.setText("-");
+            return;
+        }
+
+        if (eingabe.charAt(0) == '-') {
+            eingabe = eingabe.substring(1);
+            FeldText.setText(eingabe);
+        } else {
+            eingabe = "-" + eingabe;
+            FeldText.setText(eingabe);
+        }
 
     }
+
+    public void wasClickedAgain() {
+        String eingabe = VorzeichenSchnitt();
+
+        boolean hatOperator = eingabe.contains("+") || eingabe.contains("-") ||
+                eingabe.contains("*") || eingabe.contains("/");
+
+        if (hatOperator && !eingabe.endsWith("+") && !eingabe.endsWith("-") &&
+                !eingabe.endsWith("*") && !eingabe.endsWith("/")) {
+
+            OnErgebnisButtonClick();
+        }
+    }
+
 
 }
