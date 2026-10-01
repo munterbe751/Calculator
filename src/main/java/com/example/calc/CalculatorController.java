@@ -162,7 +162,6 @@ public class CalculatorController {
 
     }
 
-
     @FXML
     public void initialize() {        //https://www.w3schools.com/java/java_constructors.asp          //https://stackoverflow.com/questions/12005584/initialize-object-directly-in-ja
         FeldText.setFocusTraversable(false);
@@ -178,7 +177,6 @@ public class CalculatorController {
             }
         });
     }
-
 
     @FXML
     public void keys(KeyEvent event) {          //https://docs.oracle.com/javase/8/docs/api/java/awt/event/KeyEvent.html
@@ -275,7 +273,6 @@ public class CalculatorController {
         event.consume();
     }
 
-
     boolean warNegativ = false;
 
     public String VorzeichenSchnitt() {
@@ -299,7 +296,6 @@ public class CalculatorController {
         return eingabe;
 
     }
-
 
     public double OnErgebnisButtonClick() { //macht auch alle Rechenoperationen
         System.out.println("=");
@@ -429,7 +425,6 @@ public class CalculatorController {
 
     }
 
-
     public void OnInvertButtonClick() {
 
         String eingabe = FeldText.getText();
@@ -477,6 +472,5 @@ public class CalculatorController {
             OnErgebnisButtonClick();
         }
     }
-
 
 }
