@@ -1,0 +1,65 @@
+.root {
+    -fx-background-color: #202020;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.text-field {
+    -fx-background-color: #202020;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 12px;
+    -fx-border-color: transparent;
+}
+
+#VerlaufFeld {
+    -fx-text-fill: #888888;
+    -fx-font-size: 11px;
+}
+
+#FeldText {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER-RIGHT;
+}
+
+.button {
+    -fx-background-color: #2d2d2d;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+    -fx-cursor: hand;
+    -fx-transition: background-color 0.2s;
+    -fx-padding: 8px;
+}
+
+.button:hover {
+    -fx-background-color: #383838;
+}
+
+
+
+.button[text="+"],
+.button[text="-"],
+.button[text="*"],
+.button[text="/"] {
+    -fx-background-color: #333333;
+    -fx-font-weight: bold;
+}
+
+.button[text="+"]:hover,
+.button[text="-"]:hover,
+.button[text="*"]:hover,
+.button[text="/"]:hover {
+    -fx-background-color: #424242;
+}
+
+.button[text="="] {
+    -fx-background-color: #0067c0;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+.button[text="="]:hover {
+    -fx-background-color: #1a75d2;
+}
