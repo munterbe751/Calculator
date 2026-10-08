@@ -29,7 +29,6 @@
     -fx-background-radius: 6px;
     -fx-border-radius: 6px;
     -fx-cursor: hand;
-    -fx-transition: background-color 0.2s;
     -fx-padding: 8px;
 }
 
@@ -37,27 +36,23 @@
     -fx-background-color: #383838;
 }
 
-.button[text="+"],
-.button[text="-"],
-.button[text="*"],
-.button[text="/"] {
+/* Operatoren-Buttons über StyleClass */
+.operator-button {
     -fx-background-color: #333333;
     -fx-font-weight: bold;
 }
 
-.button[text="+"]:hover,
-.button[text="-"]:hover,
-.button[text="*"]:hover,
-.button[text="/"]:hover {
+.operator-button:hover {
     -fx-background-color: #424242;
 }
 
-.button[text="="] {
+/* Ist-Gleich Button über die fx:id="Ergebnis" */
+#Ergebnis {
     -fx-background-color: #0067c0;
     -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
 }
 
-.button[text="="]:hover {
+#Ergebnis:hover {
     -fx-background-color: #1a75d2;
 }

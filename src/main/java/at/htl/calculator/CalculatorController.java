@@ -33,6 +33,7 @@ public class CalculatorController {
 
     private Button fieldButtonErgebins;
 
+    @FXML
     private TextField feld;
 
     private Label texti;
